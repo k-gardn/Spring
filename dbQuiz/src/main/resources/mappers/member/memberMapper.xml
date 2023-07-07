@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.care.dbQuiz.member.MemberMapper">
+	<resultMap type="com.care.dbQuiz.member.MemberDTO" id="memberDto">
+		<id column="id" property="id"/>
+		<result column="pw" property="pw"/>
+		<result column="user_name" property="userName"/>
+		<result column="address" property="address"/>
+		<result column="mobile" property="mobile"/>
+	</resultMap>
+	<select id="loginProc" resultMap="memberDto">
+		SELECT * FROM session_quiz WHERE id=#{id}
+	</select>
+	<insert id="registerProc" parameterType="com.care.dbQuiz.member.MemberDTO">
+		INSERT INTO session_quiz VALUES(#{id}, #{pw}, #{userName}, #{address}, #{mobile}) 
+	</insert>
+</mapper>
+  

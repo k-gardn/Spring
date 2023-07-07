@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aop-reference-model>
+<aop-project name="dbXml"/>
+<aop-project name="dbQuiz"/>
+<aop-project name="cookieSession"/>
+<aop-project name="dbjava"/>
+<aop-project name="test"/>
+<aop-project name="dbBasic"/>
+<aop-project name="controllerView"/>
+</aop-reference-model>
