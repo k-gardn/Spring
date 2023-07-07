@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>userInfo</title>
-</head>
-<body>
-<%@ include file="header.jsp" %>
-
+<c:import url="/header" />
 <c:choose>
 	<c:when test="${empty sessionScope.id }">
 		<c:redirect url="login.jsp"/>
@@ -35,9 +27,7 @@
 		</div>	
 	</c:otherwise>
 </c:choose>
-<%@ include file="footer.jsp" %>
-</body>
-</html>
+<c:import url="/footer"/>
 
 
 
