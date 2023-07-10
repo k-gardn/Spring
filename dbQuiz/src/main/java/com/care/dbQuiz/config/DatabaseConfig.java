@@ -11,7 +11,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-@MapperScan(basePackages = {"com.care.dbQuiz.member"})
+@MapperScan(basePackages = {"com.care.dbQuiz.member","com.care.dbQuiz.board"})
 @Configuration
 public class DatabaseConfig {
 

@@ -24,7 +24,7 @@
 		<li><a href="${context }login">Login</a></li>
 		<li><a href="${context }memberInfo">MemberInfo</a></li>
 		<li><a href="${context }logout">Logout</a></li>
-		<li><a href="${context }/session_board/boardForm">Board</a></li>
+		<li><a href="${context }boardForm">Board</a></li>
 	</ul>
 	<hr>
 </div>

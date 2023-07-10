@@ -90,6 +90,60 @@ public class MemberService {
 		
 		model.addAttribute("members", members);
 		model.addAttribute("result", result);
+		model.addAttribute("currentPage", currentPage);
 	}
 
+	public MemberDTO userInfo(String id) {
+		if(id == null || id.isEmpty()) {
+			return null;
+		}
+		
+		String sessionId = (String)session.getAttribute("id");
+		if(sessionId.equals(id) == false && sessionId.equals("admin") == false)
+			return null;
+		
+//		MemberDTO result = memberMapper.loginProc(id);
+		return memberMapper.loginProc(id);
+	}
+	
+	public String updateProc(MemberDTO member, String confirm) {
+		
+		if(member.getPw() == null || member.getPw().isEmpty()) {
+			return "비밀번호를 입력하세요.";
+		}
+		
+		if(member.getPw().equals(confirm) == false) {
+			return "두 비밀번호를 일치하여 입력하세요.";
+		}
+		
+		if(member.getUserName() == null || member.getUserName().isEmpty()) {
+			return "이름을 입력하세요.";
+		}
+		
+		int result = memberMapper.updateProc(member);
+		if(result == 1)
+			return "회원 정보 수정 완료";
+		return "회원 정보 수정  실패";
+		
+	}
+
+	public String deleteProc(String id, String pw, String confirmPw) {
+		
+		if(pw == null || pw.isEmpty()) {
+			return "비밀번호를 입력하세요.";
+		}
+		
+		if(pw.equals(confirmPw) == false) {
+			return "두 비밀번호를 일치하여 입력하세요.";
+		}
+		
+		MemberDTO member = memberMapper.loginProc(id);
+		if(member != null && pw.equals(member.getPw())){
+			memberMapper.delete(id);
+			return "회원 정보 삭제 완료";
+		}
+		
+		return "회원 삭제  실패";
+		
+	}
 }

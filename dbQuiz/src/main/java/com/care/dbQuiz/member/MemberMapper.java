@@ -17,5 +17,7 @@ public interface MemberMapper {
 			@Param("select")String select, @Param("search")String search);
 
 	int count(@Param("select")String select, @Param("search")String search);
-
+	
+	int updateProc(MemberDTO member);
+	void delete(String id);
 }

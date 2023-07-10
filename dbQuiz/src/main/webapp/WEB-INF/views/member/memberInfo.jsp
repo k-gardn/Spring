@@ -20,7 +20,7 @@
 					<tbody>
 						<c:forEach var="member" items="${ members}">
 							<tr>
-								<td onclick="location.href='userInfo?id=${member.id }'">
+								<td onclick="location.href='userInfo?id=${member.id }&currentPage=${currentPage }'">
 									${member.id }
 								</td>
 								<td>${member.userName }</td>
