@@ -19,18 +19,34 @@
 	</select>
   
 	<select id="boardForm" resultMap="boardDto">
-		SELECT BBB.* FROM
-		(SELECT rownum as rn, AAA.* FROM (SELECT session_board.* FROM session_board  ORDER BY TO_NUMBER(no) DESC) AAA)BBB
+		SELECT BBB.* FROM 
+		(SELECT rownum as rn, AAA.* FROM 
+		(SELECT no, title, id, write_date, hits FROM session_board ORDER BY TO_NUMBER(no) DESC)AAA)BBB
 		WHERE BBB.rn BETWEEN #{begin} AND #{end}
 	</select>
 	
 	<insert id="boardWriteProc">
-		<selectKey order="BEFORE" keyProperty="no" resultType="int">
+		<selectKey order="BEFORE" keyProperty="no" resultType="String">
 			SELECT nvl(max(TO_NUMBER(no)),0) + 1 FROM session_board
 		</selectKey>
 		INSERT INTO session_board VALUES(#{no}, #{title}, #{content}, #{id}, #{writeDate}, 0, #{fileName} )
 	</insert>
 	
+	<select id="boardContent" resultMap="boardDto">
+		SELECT * FROM session_board WHERE no=#{no}
+	</select>
+	
+	<update id="incHit">
+		 UPDATE session_board SET hits = TO_NUMBER(hits) + 1 WHERE no = #{no}
+	</update>
+	
+	<select id="boardDownload">
+		SELECT file_name FROM session_board WHERE no=#{no} 
+	</select>
+	
+	<update id="boardModifyProc">
+		 UPDATE session_board SET title=#{title}, content=#{content} WHERE no = #{no}
+	</update>
 </mapper>
 
 
