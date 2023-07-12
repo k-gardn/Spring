@@ -8,7 +8,7 @@
 	function deleteCheck(){
 		result = confirm('진짜로 삭제하겠습니까?');
 		if(result == true){
-			location.href='boardDeleteService?no=${board.no}'
+			location.href='boardDeleteProc?no=${board.no}'
 		}
 	}
 </script>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ include file="../default/header.jsp" %>
+<c:import url="/header" />
 
 		<div align="center">
 		<h1>회원 탈퇴</h1>
@@ -15,7 +15,7 @@
 			</form>
 			</td></tr></table>
 		</div>
-<%@include file="../default/footer.jsp"%>
+<c:import url="/footer" />
 
 
 

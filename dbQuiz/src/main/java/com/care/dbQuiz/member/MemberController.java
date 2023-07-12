@@ -39,7 +39,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("loginProc")
-	public String loginProc(MemberDTO member) {
+	public String loginProc(MemberDTO member) { 
 		String result = service.loginProc(member);
 		if(result.equals("로그인 성공")) {
 			return "redirect:index";

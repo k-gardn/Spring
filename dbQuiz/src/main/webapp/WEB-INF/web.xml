@@ -30,6 +30,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
+	<!-- 추가 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>

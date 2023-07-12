@@ -47,6 +47,10 @@
 	<update id="boardModifyProc">
 		 UPDATE session_board SET title=#{title}, content=#{content} WHERE no = #{no}
 	</update>
+	
+	<delete id="boardDeleteProc">
+		DELETE FROM session_board WHERE no=#{no}
+	</delete>
 </mapper>
 
 

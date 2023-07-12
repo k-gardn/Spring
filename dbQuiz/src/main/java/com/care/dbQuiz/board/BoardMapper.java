@@ -22,6 +22,8 @@ public interface BoardMapper {
 	String boardDownload(int no);
 	
 	void boardModifyProc(BoardDTO board);
+	
+	void boardDeleteProc(int no);
 }
 
 

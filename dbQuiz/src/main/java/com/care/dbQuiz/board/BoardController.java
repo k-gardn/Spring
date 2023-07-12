@@ -79,17 +79,24 @@ public class BoardController {
 		if(id == null || id.isEmpty()) {
 			return "redirect:login";
 		}
+		
 		BoardDTO board = service.boardModify(n);
 		if(board == null)
 			return "redirect:boardForm";
 		
-		
-		model.addAttribute("board",board);
+		if(id.equals(board.getId()) == false)
+			return "redirect:boardContent?no="+n;
+	
+		model.addAttribute("board", board);
 		return "board/boardModify";
 	}
 	
 	@PostMapping("boardModifyProc")
 	public String boardModifyProc(BoardDTO board) {
+//		System.out.println("no : " + board.getNo());
+//		System.out.println("title : " + board.getTitle());
+//		System.out.println("content : " + board.getContent());
+		
 		String id = (String)session.getAttribute("id");
 		if(id == null || id.isEmpty()) {
 			return "redirect:login";
@@ -97,11 +104,29 @@ public class BoardController {
 		
 		String msg = service.boardModifyProc(board);
 		if(msg.equals("게시글 수정 완료"))
-			return "forward:boardContent?no="+board.getNo();
+			return "redirect:boardContent?no="+board.getNo();
 		
-		return "forward:boardModify?no="+board.getNo();
+		return "redirect:boardModify?no="+board.getNo();
 	}
 	
+	@GetMapping("boardDeleteProc")
+	public String boardDeleteProc(
+			@RequestParam(value="no", required = false)String n,
+			Model model) {
+		
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "redirect:login";
+		}
+		
+		String msg = service.boardDeleteProc(n);
+		if(msg.equals("로그인"))
+			return "redirect:login";
+		if(msg.equals("작성자만 삭제 할 수 있습니다."))
+			return "forward:boardContent"; // 이미 존재해서 parameter를 넘길 필요 없음.
+	
+		return "redirect:boardForm";
+	}
 }
 
 

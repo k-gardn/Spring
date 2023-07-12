@@ -172,27 +172,58 @@ public class BoardService {
 		BoardDTO board = boardMapper.boardContent(no);
 		if(board == null)
 			return null;
-		
-		
+
 		if(board.getFileName() != null ) {
-		String fn = board.getFileName();
-			try {
-				String[] fileName = fn.split("-", 2);
-				board.setFileName(fileName[1]);
-				
-			}catch(Exception e){
-				board.setFileName("파일 없음");
+			String fn = board.getFileName();
+				try {
+					String[] fileName = fn.split("-", 2);
+					board.setFileName(fileName[1]);
+					
+				}catch(Exception e){
+					board.setFileName("파일 없음");
+				}
 			}
-		}
 		return board;
 	}
 	
 	public String boardModifyProc(BoardDTO board) {
 		if(board.getTitle() == null || board.getTitle().isEmpty())
 			return "제목을 입력하세요.";
+		
 		boardMapper.boardModifyProc(board);
 		return "게시글 수정 완료";
-	}	
+	}
+	
+	public String boardDeleteProc(String n) {
+		String id = (String)session.getAttribute("id");
+		if(id == null || id.isEmpty()) {
+			return "로그인";
+		}
+		
+		int no = 0;
+		try{
+			no = Integer.parseInt(n);
+		}catch(Exception e){
+			return "게시글 번호에 문제가 생겼습니다.";
+		}
+		
+		BoardDTO board = boardMapper.boardContent(no);
+		if(board == null)
+			return "게시글 번호에 문제가 생겼습니다.";
+		
+		if(id.equals(board.getId()) == false)
+			return "작성자만 삭제 할 수 있습니다.";
+		
+		boardMapper.boardDeleteProc(no);
+		
+		String path = "C:\\javas\\upload\\" + board.getFileName();
+		File file = new File(path);
+		if(file.exists() == true) {
+			file.delete();
+		}
+		
+		return "게시글 삭제 완료";
+	}
 }
 
 
