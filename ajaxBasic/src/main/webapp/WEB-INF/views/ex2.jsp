@@ -7,7 +7,7 @@
 <style type="text/css">
 	span{color:red;}
 </style>
-<title>ex1</title>
+<title>ex2</title>
 	<script>
 		var xhr;
 		function send() {

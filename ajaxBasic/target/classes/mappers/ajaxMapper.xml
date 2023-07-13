@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.care.ajaxBasic.MemberMapper">
-  	<select id="idCheck">
-  		SELECT id FROM session_quiz
-  	</select>
-  </mapper>
+ <mapper namespace="com.care.ajaxBasic.AjaxMapper">
+	<select id="exists">
+		SELECT id FROM session_quiz WHERE id=#{id} 
+	</select>
+</mapper>
