@@ -12,9 +12,10 @@
 		var pwValue = document.getElementById('pw').value
 		//console.log('idValue : ' + idValue)
 		//console.log('pwValue : ' + pwValue)
+		
 		// 자바스크립트 object 라는 자료형으로 여러 데이터를 한 개로 묶음.
 		var reqData = {id : idValue, pw : pwValue}
-		//console.log('reqData : ' + reqData)
+		console.log('reqData : ' + reqData)
 		
 		// JSON.stringify(reqData) : 자바스크립트 object 자료형을 JSON 문자열 자료형으로 변환
 		// 네트워크(인터넷)로 데이터를 전달하기 위해서 변환.
@@ -25,6 +26,10 @@
 		xhr.open('post', 'ex3');
 		xhr.setRequestHeader('content-type', 'application/json');
 		xhr.send(reqData);
+		
+		//onreadystatechange는 이벤트 함수.
+		// readyState의 상태가 변하면 알아서 실행하는 콜백 함수.
+		// 자바 스크립트가 실행하는 함수.
 		xhr.onreadystatechange = resProc;
 /* 		console.log(typeof 10)
 		console.log(typeof 1.1)

@@ -1,10 +1,17 @@
 package com.care.ajaxBasic;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class AjaxService {
@@ -23,6 +30,56 @@ public class AjaxService {
 		if(result == null)
 			return "사용 가능한 아이디 입니다.";
 		return "사용 할 수 없는 아이디입니다. 다른 아이디를 입력해 주세요.";
+	}
+	
+	public String jsonInsert() {
+		/*
+		 * JSON 파일의 데이터를 읽어와서 
+		 * mapper.jsonInsert()를 호출해서 
+		 * json_table 이름의 테이블에 jsonExam2.json 파일의 데이터를 입력
+		 * json_table 테이블의 컬럼은 title, artist, price varchar2로 구성.
+		 * 확인 : sqlDeveloper에서 직접 확인(SELECT * FROM json_table;)
+		 */
+		ClassPathResource cpr = new ClassPathResource("jsonExam2.json");
+		List<AjaxVO> lists = null;
+		try {
+			File file = cpr.getFile();
+			ObjectMapper mapper = new ObjectMapper();
+			lists = mapper.readValue(file, new TypeReference<List<AjaxVO>>() {});
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		/*
+		 * 테이블 생성
+		 CREATE TABLE json_table (
+		    title varchar2(20),
+		    artist varchar2(20),
+		    price varchar2(10)
+		);
+		COMMIT;
+		*/
+		
+		//json_table 테이블의 모든 데이터 삭제, 초기화 
+		mapper.jsonDelete();
+		
+		for(AjaxVO ajax : lists) {
+			int result = mapper.jsonInsert(ajax);
+			if(result == 0)
+				return "데이터 입력 중 오류가 발생했습니다. 다시 시도 하세요.";
+		}
+		
+		return "모든 데이터가 입력되었습니다.";
+	}
+	
+	public List<AjaxVO> ex6() {
+		return mapper.ex6();
+	}
+	
+	public List<AjaxVO> quiz(String search) {
+		if(search == null || search.equals(""))
+			return mapper.quiz();
+		return mapper.searchQuiz(search);
 	}
 
 }
