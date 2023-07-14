@@ -25,6 +25,6 @@
 	</select>
 	
 	<select id="searchQuiz" resultType="com.care.ajaxBasic.AjaxVO">
-		SELECT * FROM json_table WHERE title like '%'||#{search}||'%'
+		SELECT * FROM json_table WHERE LOWER(title) like LOWER('%'||#{search}||'%')
 	</select>
 </mapper>
