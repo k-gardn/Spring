@@ -77,7 +77,7 @@ public class AjaxService {
 	}
 	
 	public List<AjaxVO> quiz(String search) {
-		if(search == null || search.equals(""))
+		if(search == null || search.isEmpty())
 			return mapper.quiz();
 		return mapper.searchQuiz(search);
 	}

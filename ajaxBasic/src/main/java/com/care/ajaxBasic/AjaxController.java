@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.AnnotationIntrospector.ReferenceProperty.Type;
 import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class AjaxController {

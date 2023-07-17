@@ -7,8 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 public class MemberController {
@@ -134,6 +138,19 @@ public class MemberController {
 		}
 		model.addAttribute("msg", result);
 		return "member/delete";
+	}
+	
+	@ResponseBody
+	@PostMapping(value="sendEmail", produces = "text/plain; charset=utf-8")
+	public String sendEmail(@RequestBody(required = false) String email) {
+		return service.sendEmail(email);
+	}
+	
+	@ResponseBody
+	@PostMapping(value="sendAuth", produces = "text/plain; charset=utf-8")
+	public String sendAuth(@RequestBody(required = false) String auth) {
+		System.out.println("sendAuth()");
+		return service.sendAuth(auth);
 	}
 }
 
