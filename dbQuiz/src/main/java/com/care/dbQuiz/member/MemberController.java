@@ -152,6 +152,16 @@ public class MemberController {
 		System.out.println("sendAuth()");
 		return service.sendAuth(auth);
 	}
+	
+	//카카오 로그인
+	
+	@Autowired private KakaoService kakao;
+	
+	@GetMapping("kakaoLogin")
+	public void kakaoLogin(String code) {
+		System.out.println("code : " + code);
+		kakao.getAccessToken(code);
+	}
 }
 
 
