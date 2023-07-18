@@ -40,13 +40,18 @@ public class AjaxService {
 		 * json_table 테이블의 컬럼은 title, artist, price varchar2로 구성.
 		 * 확인 : sqlDeveloper에서 직접 확인(SELECT * FROM json_table;)
 		 */
+		
 		ClassPathResource cpr = new ClassPathResource("jsonExam2.json");
 		List<AjaxVO> lists = null;
 		try {
 			File file = cpr.getFile();
 			ObjectMapper mapper = new ObjectMapper();
-			lists = mapper.readValue(file, new TypeReference<List<AjaxVO>>() {});
+			//ObjectMapper는 JSON과 Java 객체 간의 변환을 처리하는 역할.
 			
+			lists = mapper.readValue(file, new TypeReference<List<AjaxVO>>() {});
+			//ObjectMapper의 readValue() 메서드를 사용하여 JSON 파일을 지정된 유형의 Java 객체로 매핑.
+			//TypeReference<List<AjaxVO>>()는 변환할 Java 객체의 유형을 지정
+			//변환된 객체는 lists 변수에 할당.
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

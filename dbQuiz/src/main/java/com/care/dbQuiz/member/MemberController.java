@@ -158,10 +158,20 @@ public class MemberController {
 	@Autowired private KakaoService kakao;
 	
 	@GetMapping("kakaoLogin")
-	public void kakaoLogin(String code) {
+	public String kakaoLogin(String code) {
 		System.out.println("code : " + code);
 		kakao.getAccessToken(code);
+		kakao.getUserInfo();
+		return "redirect:index";
 	}
+	
+	@GetMapping("kakaoLogout")
+	public String kakaoLogout() {
+		kakao.unLink();
+		return "redirect:index";
+	}
+	
+	
 }
 
 
